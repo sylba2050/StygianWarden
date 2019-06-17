@@ -1,6 +1,7 @@
-# StygianWarden: GO111MODELE=on go build main.go
+GO111MODULE=on
+
 StygianWarden:
-	env GO111MODELE=on go build main.go
+	go build main.go
 
 clean:
 	rm -rf main
