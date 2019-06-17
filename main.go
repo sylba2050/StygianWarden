@@ -5,19 +5,28 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
+	"strings"
 
 	"github.com/k0kubun/pp"
 	"github.com/sylba2050/StygianWarden/config"
+	"github.com/sylba2050/StygianWarden/utils"
 )
 
 func main() {
 	proxyPort := ":80"
 
 	d := config.Load("./config.yaml")
+	endpoints := d.GetEndpoints()
+	addr := d.GetAddr()
+
 	pp.Println(d)
 
 	director := func(request *http.Request) {
-		log.Print(request.URL.Path)
+		path := strings.Split(request.URL.Path, "/")[1]
+
+		if utils.StringInSlice(path, endpoints) {
+			log.Println(addr[utils.IndexOfSlice(path, endpoints)])
+		}
 		request.URL.Scheme = "http"
 		request.URL.Host = ":8080"
 	}

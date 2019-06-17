@@ -29,3 +29,19 @@ func Load(path string) Data {
 
 	return d
 }
+
+func (d Data) GetEndpoints() []string {
+	var res []string
+	for _, p := range d.Proxies {
+		res = append(res, p.Endpoints)
+	}
+	return res
+}
+
+func (d Data) GetAddr() []int {
+	var res []int
+	for _, p := range d.Proxies {
+		res = append(res, p.RedirectAddr)
+	}
+	return res
+}
