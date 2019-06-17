@@ -5,10 +5,16 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
+
+	"github.com/k0kubun/pp"
+	"github.com/sylba2050/StygianWarden/config"
 )
 
 func main() {
 	proxyPort := ":80"
+
+	d := config.Load("./config.yaml")
+	pp.Println(d)
 
 	director := func(request *http.Request) {
 		log.Print(request.URL.Path)

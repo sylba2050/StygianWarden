@@ -1,0 +1,8 @@
+addr: 80
+proxies:
+    -
+        endpoints: "hoge"
+        redirect_addr:  8080
+    -
+        endpoints: "piyo"
+        redirect_addr:  8000
