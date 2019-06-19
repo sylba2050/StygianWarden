@@ -2,7 +2,9 @@ addr: 80
 proxies:
   -
     endpoints: "hoge"
-    redirect_addr:  8080
+    redirect_addr: 8080
+    is_leave_original_url: true
   -
     endpoints: "piyo"
     redirect_addr:  8000
+    is_leave_original_url: false
