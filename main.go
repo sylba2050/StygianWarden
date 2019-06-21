@@ -5,11 +5,10 @@ import (
 	"log"
 	"net/http"
 	"net/http/httputil"
-	"strings"
 
 	"github.com/k0kubun/pp"
+	"github.com/sylba2050/StygianWarden/analysis"
 	"github.com/sylba2050/StygianWarden/config"
-	"github.com/sylba2050/StygianWarden/utils"
 )
 
 func main() {
@@ -22,11 +21,13 @@ func main() {
 	pp.Println(d)
 
 	director := func(request *http.Request) {
-		path := strings.Split(request.URL.Path, "/")[1]
-
-		if utils.StringInSlice(path, endpoints) {
-			log.Println(addr[utils.IndexOfSlice(path, endpoints)])
+		idx, err := analysis.GetRedirectIdx(request.URL.Path, endpoints)
+		if err != nil {
+			log.Println(err)
+		} else {
+			log.Println(addr[idx])
 		}
+
 		request.URL.Scheme = "http"
 		request.URL.Host = ":8080"
 	}
