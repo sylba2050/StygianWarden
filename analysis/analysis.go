@@ -31,3 +31,18 @@ func GetConfigIdx(origin string, configs []string) (int, error) {
 
 	return -1, errors.New("Not target")
 }
+
+func GetRedirectPath(origin, config string, isRemove bool) (string, error) {
+	if isRemove {
+		o := strings.Split(origin, "/")
+		c := strings.Split(config, "/")
+
+		for i := 0; i < len(c); i++ {
+			o = o[1:]
+		}
+
+		return strings.Join(o, "/"), nil
+	}
+
+	return origin, nil
+}
