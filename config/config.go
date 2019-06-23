@@ -13,6 +13,7 @@ type Data struct {
 type Proxy struct {
 	RedirectAddr int    `yaml:"redirect_addr"`
 	Endpoints    string `yaml:"endpoints"`
+	IsLeaves     bool   `yaml:"is_leave_original_url"`
 }
 
 func Load(path string) Data {
@@ -42,6 +43,14 @@ func (d Data) GetAddr() []int {
 	var res []int
 	for _, p := range d.Proxies {
 		res = append(res, p.RedirectAddr)
+	}
+	return res
+}
+
+func (d Data) GetIsLeaves() []bool {
+	var res []bool
+	for _, p := range d.Proxies {
+		res = append(res, p.IsLeaves)
 	}
 	return res
 }
