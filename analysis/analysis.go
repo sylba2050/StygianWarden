@@ -13,8 +13,8 @@ func IsRedirectTarget(origin, config string) bool {
 		return false
 	}
 
-	for i := 0; i < len(o); i++ {
-		if o[i] != c[i] {
+	for i := 0; i < len(c); i++ {
+		if c[i] != o[i] {
 			return false
 		}
 	}
@@ -41,6 +41,7 @@ func GetRedirectPath(origin, config string, isRemove bool) (string, error) {
 			o = o[1:]
 		}
 
+		o = append([]string{""}, o...)
 		return strings.Join(o, "/"), nil
 	}
 
