@@ -21,7 +21,7 @@ func main() {
 	pp.Println(d)
 
 	director := func(request *http.Request) {
-		idx, err := analysis.GetRedirectIdx(request.URL.Path, endpoints)
+		idx, err := analysis.GetConfigIdx(request.URL.Path, endpoints)
 		if err != nil {
 			log.Println(err)
 		} else {

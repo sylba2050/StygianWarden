@@ -22,9 +22,8 @@ func IsRedirectTarget(origin, config string) bool {
 	return true
 }
 
-func GetRedirectIdx(origin string, configs []string) (int, error) {
+func GetConfigIdx(origin string, configs []string) (int, error) {
 	for i := 0; i < len(configs); i++ {
-
 		if IsRedirectTarget(origin, configs[i]) {
 			return i, nil
 		}
